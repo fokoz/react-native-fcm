@@ -42,18 +42,20 @@ public class MessagingService extends FirebaseMessagingService {
                 // If it's constructed, send a notification
                 if (context != null) {
                     context.sendOrderedBroadcast(message, null);
-                } else {
-                    // Otherwise wait for construction, then send the notification
-                    mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
-                        public void onReactContextInitialized(ReactContext context) {
-                            context.sendOrderedBroadcast(message, null);
-                        }
-                    });
-                    if (!mReactInstanceManager.hasStartedCreatingInitialContext()) {
-                        // Construct it in the background
-                        mReactInstanceManager.createReactContextInBackground();
-                    }
-                }
+                } 
+                //Remove this because of confliction with react-native-navigation (just for now)
+//                 else {
+//                     // Otherwise wait for construction, then send the notification
+//                     mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
+//                         public void onReactContextInitialized(ReactContext context) {
+//                             context.sendOrderedBroadcast(message, null);
+//                         }
+//                     });
+//                     if (!mReactInstanceManager.hasStartedCreatingInitialContext()) {
+//                         // Construct it in the background
+//                         mReactInstanceManager.createReactContextInBackground();
+//                     }
+//                 }
             }
         });
     }
